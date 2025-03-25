@@ -12,10 +12,12 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 from pathlib import Path
 
+import dj_database_url
 import environ
 
 env = environ.Env(
     DEBUG=(bool, False),
+    IS_PROD=(bool, True),
 )
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -75,8 +77,12 @@ WSGI_APPLICATION = 'penny_wise.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
+if env('IS_PROD'):
+    db = dj_database_url.config(
+        default=env('DB_URL')
+    )
+else:
+    db = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.getenv('PENNY_WISE_DB_NAME'),
         'USER': os.getenv('PENNY_WISE_DB_USER'),
@@ -84,10 +90,9 @@ DATABASES = {
         'HOST': os.getenv('PENNY_WISE_DB_HOST'),
         'PORT': os.getenv('PENNY_WISE_DB_PORT'),
     },
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
+
+DATABASES = {
+    'default': db
 }
 
 # Password validation
