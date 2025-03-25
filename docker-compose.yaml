@@ -2,6 +2,7 @@ version: '3.8'
 services:
   web:
     build: .
+    container_name: web
     volumes:
       - ./app:/usr/src/app
     ports:
