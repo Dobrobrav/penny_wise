@@ -78,9 +78,7 @@ WSGI_APPLICATION = 'penny_wise.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 if env('IS_PROD'):
-    db = dj_database_url.config(
-        default=env('DB_URL')
-    )
+    db = dj_database_url.config(default=env('DB_URL'))
 else:
     db = {
         'ENGINE': 'django.db.backends.postgresql',
@@ -89,7 +87,7 @@ else:
         'PASSWORD': os.getenv('PENNY_WISE_DB_PASSWORD'),
         'HOST': os.getenv('PENNY_WISE_DB_HOST'),
         'PORT': os.getenv('PENNY_WISE_DB_PORT'),
-    },
+    }
 
 DATABASES = {
     'default': db
