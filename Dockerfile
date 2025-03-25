@@ -1,12 +1,10 @@
 FROM python:3.13
 
-WORKDIR /usr/src/app
-
-COPY /conf /usr/src/app/conf
-
-
-
+COPY /conf /usr/src/conf
+WORKDIR /usr/src
 RUN pip install -r conf/requirements.txt
 
-
-CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+WORKDIR /usr/src/app
+ENTRYPOINT ["/entrypoint.sh"]
