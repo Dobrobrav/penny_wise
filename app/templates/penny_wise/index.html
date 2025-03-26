@@ -10,6 +10,7 @@
       padding: 0;
       font-family: system-ui, sans-serif;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
@@ -19,27 +20,102 @@
 
     .title {
       text-align: center;
-      padding: 2rem;
-      border-radius: 16px;
-      background: white;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+      margin-bottom: 2rem;
     }
 
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    p {
-      font-size: 1rem;
-      color: #666;
+    canvas {
+      background: #fff;
+      border: 1px solid #ccc;
     }
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="title">
     <h1>💸 Money Waste</h1>
     <p>Пока здесь только заглушка... но скоро ты начнёшь тратить красиво 👛</p>
   </div>
+
+  <canvas id="game" width="800" height="200"></canvas>
+
+  <script>
+    const canvas = document.getElementById("game");
+    const ctx = canvas.getContext("2d");
+
+    let dino = { x: 50, y: 150, width: 30, height: 30, vy: 0, isJumping: false };
+    let cactus = { x: 800, width: 20, height: 40 };
+    let gravity = 0.3; // падение медленнее
+    let gameSpeed = 2.5;
+    let isGameOver = false;
+
+    function drawDino() {
+      ctx.fillStyle = "#333";
+      ctx.fillRect(dino.x, dino.y, dino.width, dino.height);
+    }
+
+    function drawCactus() {
+      ctx.fillStyle = "#2ecc71";
+      ctx.fillRect(cactus.x, 170 - cactus.height, cactus.width, cactus.height);
+    }
+
+    function update() {
+      if (isGameOver) return;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      if (dino.isJumping) {
+        dino.vy -= gravity;
+        dino.y -= dino.vy;
+
+        if (dino.y >= 150) {
+          dino.y = 150;
+          dino.isJumping = false;
+          dino.vy = 0;
+        }
+      }
+
+      cactus.x -= gameSpeed;
+      if (cactus.x + cactus.width < 0) {
+        cactus.x = 800 + Math.random() * 200;
+        cactus.height = 20 + Math.random() * 40;
+      }
+
+      if (
+        dino.x < cactus.x + cactus.width &&
+        dino.x + dino.width > cactus.x &&
+        dino.y + dino.height > 170 - cactus.height
+      ) {
+        isGameOver = true;
+        setTimeout(() => {
+          alert("💀 Game Over!");
+          document.location.reload();
+        }, 100);
+        return;
+      }
+
+      drawDino();
+      drawCactus();
+
+      requestAnimationFrame(update);
+    }
+
+    function jump() {
+      if (!dino.isJumping && !isGameOver) {
+        dino.isJumping = true;
+        dino.vy = 14; // выше прыжок
+      }
+    }
+
+    document.addEventListener("keydown", (e) => {
+      if (e.code === "Space") {
+        jump();
+      }
+    });
+
+    canvas.addEventListener("touchstart", () => {
+      jump();
+    });
+
+    update();
+  </script>
 </body>
 </html>
