@@ -1,3 +1,2 @@
-Some placeholder text
-Some placeholder text x2
-Some placeholder text 3
+Deployed web-site:
+http://185.207.0.65:8000
