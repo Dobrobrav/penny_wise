@@ -21,9 +21,14 @@
     .title {
       text-align: center;
       margin-bottom: 2rem;
+      padding: 0 1rem;
     }
 
-    canvas {
+    #game {
+      width: 90vw;
+      height: 25vh;
+      max-width: 800px;
+      max-height: 200px;
       background: #fff;
       border: 1px solid #ccc;
     }
@@ -35,15 +40,22 @@
     <p>Пока здесь только заглушка... но скоро ты начнёшь тратить красиво 👛</p>
   </div>
 
-  <canvas id="game" width="800" height="200"></canvas>
+  <canvas id="game"></canvas>
 
   <script>
     const canvas = document.getElementById("game");
     const ctx = canvas.getContext("2d");
 
-    let dino = { x: 50, y: 150, width: 30, height: 30, vy: 0, isJumping: false };
-    let cactus = { x: 800, width: 20, height: 40 };
-    let gravity = 0.3; // падение медленнее
+    function resizeCanvas() {
+      canvas.width = canvas.clientWidth;
+      canvas.height = canvas.clientHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    let dino = { x: 50, y: canvas.height - 50, width: 30, height: 30, vy: 0, isJumping: false };
+    let cactus = { x: canvas.width, width: 20, height: 40 };
+    let gravity = 0.15;
     let gameSpeed = 2.5;
     let isGameOver = false;
 
@@ -54,7 +66,7 @@
 
     function drawCactus() {
       ctx.fillStyle = "#2ecc71";
-      ctx.fillRect(cactus.x, 170 - cactus.height, cactus.width, cactus.height);
+      ctx.fillRect(cactus.x, canvas.height - cactus.height - 20, cactus.width, cactus.height);
     }
 
     function update() {
@@ -66,8 +78,13 @@
         dino.vy -= gravity;
         dino.y -= dino.vy;
 
-        if (dino.y >= 150) {
-          dino.y = 150;
+        if (dino.y < 20) {
+  dino.y = 20;
+  dino.vy = 0;
+}
+
+        if (dino.y >= canvas.height - 50) {
+          dino.y = canvas.height - 50;
           dino.isJumping = false;
           dino.vy = 0;
         }
@@ -75,14 +92,14 @@
 
       cactus.x -= gameSpeed;
       if (cactus.x + cactus.width < 0) {
-        cactus.x = 800 + Math.random() * 200;
+        cactus.x = canvas.width + Math.random() * 100;
         cactus.height = 20 + Math.random() * 40;
       }
 
       if (
         dino.x < cactus.x + cactus.width &&
         dino.x + dino.width > cactus.x &&
-        dino.y + dino.height > 170 - cactus.height
+        dino.y + dino.height > canvas.height - cactus.height - 20
       ) {
         isGameOver = true;
         setTimeout(() => {
@@ -101,7 +118,7 @@
     function jump() {
       if (!dino.isJumping && !isGameOver) {
         dino.isJumping = true;
-        dino.vy = 14; // выше прыжок
+        dino.vy = 14;
       }
     }
 
