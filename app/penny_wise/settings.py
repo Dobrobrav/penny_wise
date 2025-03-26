@@ -18,6 +18,7 @@ import environ
 env = environ.Env(
     DEBUG=(bool, False),
     IS_PROD=(bool, True),
+    IS_DB_CONNECTION_OVER_URL=(bool, False),
 )
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -81,7 +82,7 @@ WSGI_APPLICATION = 'penny_wise.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-if env('IS_PROD'):
+if env('IS_DB_CONNECTION_OVER_URL'):
     db = dj_database_url.config(default=env('DB_URL'))
 else:
     db = {
