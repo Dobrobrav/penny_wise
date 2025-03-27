@@ -34,7 +34,7 @@ jobs:
 
       - name: Check db ready
         run: |
-          docker compose exec db pg_isready -U test_user
+          docker compose -f docker-compose.yaml -f docker-compose.tests.yaml exec db pg_isready -U test_user
 
       - name: Run tests inside container
         run: |
