@@ -31,6 +31,15 @@ jobs:
         run: |
           docker compose -f docker-compose.yaml -f docker-compose.tests.yaml logs db
 
+      - name: Wait for Postgres to be ready
+        run: |
+          for i in {1..15}; do
+            echo "Checking Postgres availability ($i/15)..."
+            docker compose -f docker-compose.yaml -f docker-compose.tests.yaml exec -T db pg_isready -U test_user && exit 0
+            sleep 2
+          done
+          echo "Postgres failed to start in time" >&2
+          exit 1
 
       - name: Check db ready
         run: |
