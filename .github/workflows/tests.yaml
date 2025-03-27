@@ -20,7 +20,7 @@ jobs:
             if [[ ! "$key" =~ ^# && "$key" != "" ]]; then
               echo "$key=$value" >> "$GITHUB_ENV"
             fi
-          done < docker/.env.tests
+          done < .env.tests
 
       - name: Set up Docker Compose
         run: |
