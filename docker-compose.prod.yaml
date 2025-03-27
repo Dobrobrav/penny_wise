@@ -1,4 +1,0 @@
-services:
-  web:
-    env_file:
-      - env/.env.prod # supposed to be added on prod
