@@ -30,12 +30,12 @@ jobs:
 
       - name: Set up Docker Compose
         run: |
-          docker-compose -f docker-compose.yml up -d --build
+          docker compose -f docker-compose.yml up -d --build
 
       - name: Run tests inside container
         run: |
-          docker-compose exec -T web python manage.py test --verbosity=2
+          docker compose exec -T web python manage.py test --verbosity=2
 
       - name: Stop Docker Compose
         if: always()
-        run: docker-compose down
+        run: docker compose down
