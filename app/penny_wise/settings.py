@@ -15,13 +15,24 @@ from pathlib import Path
 import dj_database_url
 import environ
 
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 env = environ.Env(
     DEBUG=(bool, False),
     IS_PROD=(bool, True),
     IS_DB_CONNECTION_OVER_URL=(bool, False),
 )
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+# TODO: consider changing this piece.
+#  Add smt like a var for setting path to file with env vars
+"""
+When running locally without docker compose,
+environ tries to find the .env file near manage.py 
+but .env is located 1 level above.
+"""
+env_vars_loaded = "IS_PROD" in os.environ
+if not env_vars_loaded:
+    env.read_env(BASE_DIR.parent / ".env")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
