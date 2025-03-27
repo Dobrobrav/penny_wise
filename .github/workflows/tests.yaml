@@ -43,6 +43,7 @@ jobs:
         run: |
           cd docker
           docker compose exec -T web python manage.py test --verbosity=2
+          docker compose exec web pytest
 
       - name: Stop Docker Compose
         if: always()
