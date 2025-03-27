@@ -13,15 +13,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      #      - name: Export .env.tests into env
-      #        run: |
-      #          echo "Reading .env.tests into environment..."
-      #          while IFS='=' read -r key value; do
-      #            if [[ ! "$key" =~ ^# && "$key" != "" ]]; then
-      #              echo "$key=$value" >> "$GITHUB_ENV"
-      #            fi
-      #          done < .env.tests
-
       - name: Set up Docker Compose
         run: |
           cd docker
