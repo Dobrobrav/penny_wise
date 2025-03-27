@@ -46,6 +46,7 @@ jobs:
 
       - name: Run pytest-tests
         run: |
+          cd docker
           docker compose exec web pytest
 
       - name: Stop Docker Compose
