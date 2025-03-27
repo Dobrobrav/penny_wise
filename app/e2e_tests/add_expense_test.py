@@ -1,17 +1,21 @@
-from typing import Generator
-
 import pytest
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.ie.webdriver import WebDriver
 
-from app.typings import Generator_
+from typings import Generator_
 
 
 @pytest.fixture
 def browser() -> Generator_[WebDriver]:
-    browser = webdriver.Chrome()
+    options = Options()
+    options.add_argument('--headless')  # запускаем без GUI
+    options.add_argument('--no-sandbox')  # стандартные флаги для Docker
+    options.add_argument('--disable-dev-shm-usage')
+    browser = webdriver.Chrome(options)
     yield browser
+
     browser.quit()
 
 
@@ -36,9 +40,6 @@ def test_add_expense(
     browser.find_element(by=By.ID, value='expense_img')
 
     # user types in expense on the page (via form?)
-
-
-
 
     # user presses a button to save it
 
