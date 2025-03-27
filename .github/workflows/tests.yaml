@@ -29,7 +29,8 @@ jobs:
 
       - name: Check logs
         run: |
-          docker compose logs db
+          docker compose -f docker-compose.yaml -f docker-compose.tests.yaml logs db
+
 
       - name: Check db ready
         run: |
