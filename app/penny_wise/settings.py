@@ -24,7 +24,7 @@ env = environ.Env(
     IS_DB_CONNECTION_OVER_URL=(bool, False),
 )
 
-env_vars_loaded = "IS_PROD" in os.environ # IS_PROD is just arbitrary env var to see that env vars are loaded
+env_vars_loaded = "IS_PROD" in os.environ  # IS_PROD is just arbitrary env var to see that env vars are loaded
 # if env vars not loaded automatically, then trying to load then manually
 if not env_vars_loaded:
     env_file_path = BASE_DIR.parent / "env/.env.local"
@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'expenses',
 ]
 
 MIDDLEWARE = [
@@ -61,7 +63,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    'whitenoise.middleware.WhiteNoiseMiddleware'
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
