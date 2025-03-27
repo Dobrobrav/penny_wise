@@ -30,13 +30,17 @@ def test_add_expense(
     # the button redirects them to the page for creating an expense.
     assert browser.title == 'Add expense'
 
-    # browser.find_element(by=By.ID, value='expense_name')
-    # browser.find_element(by=By.ID, value='expense_cost')
-    # browser.find_element(by=By.ID, value='expense_category')
-    # browser.find_element(by=By.ID, value='expense_img')
+    browser.find_element(by=By.ID, value='expense_name')
+    browser.find_element(by=By.ID, value='expense_cost')
+    browser.find_element(by=By.ID, value='expense_category')
+    browser.find_element(by=By.ID, value='expense_img')
 
     # user types in expense on the page (via form?)
+
+
+
 
     # user presses a button to save it
 
     # the page gets updated and there's the new expense
+    pytest.xfail(reason='Finish the test!')
