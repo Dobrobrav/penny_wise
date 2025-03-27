@@ -2,3 +2,14 @@ services:
   web:
     env_file:
       - ../env/.env.prod # file .env.prod file is supposed to be added on prod
+
+  db:
+    image: postgres:16
+    container_name: postgres
+    restart: always
+    env_file:
+      - ../env/.env.local
+    ports:
+      - "5434:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
