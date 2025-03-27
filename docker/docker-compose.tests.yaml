@@ -4,7 +4,7 @@ services:
     container_name: postgres
     restart: always
     env_file:
-      - env/.env.tests
+      - ../env/.env.tests
 
 
   web:
@@ -18,4 +18,4 @@ services:
     depends_on:
       - db
     env_file:
-      - env/.env.tests
+      - ../env/.env.tests

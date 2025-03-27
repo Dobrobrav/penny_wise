@@ -1,8 +1,0 @@
-services:
-  web:
-    build: .
-    container_name: web
-    volumes:
-      - ./app:/usr/src/app
-    ports:
-      - '80:8000'

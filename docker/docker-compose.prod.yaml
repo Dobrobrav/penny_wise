@@ -1,0 +1,4 @@
+services:
+  web:
+    env_file:
+      - ../env/.env.prod # file .env.prod file is supposed to be added on prod
