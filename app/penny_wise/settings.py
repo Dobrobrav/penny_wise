@@ -15,13 +15,20 @@ from pathlib import Path
 import dj_database_url
 import environ
 
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 env = environ.Env(
     DEBUG=(bool, False),
     IS_PROD=(bool, True),
     IS_DB_CONNECTION_OVER_URL=(bool, False),
 )
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+
+env_vars_loaded = "IS_PROD" in os.environ # IS_PROD is just arbitrary env var to see that env vars are loaded
+# if env vars not loaded automatically, then trying to load then manually
+if not env_vars_loaded:
+    env_file_path = BASE_DIR.parent / ".env"
+    env.read_env(env_file_path)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
