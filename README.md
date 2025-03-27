@@ -1,2 +1,1 @@
-Deployed web-site:
-http://185.207.0.65:8000
+Deployed web-site: http://money-waste.ru
