@@ -25,7 +25,7 @@ jobs:
       - name: Set up Docker Compose
         run: |
           docker compose -f docker-compose.yaml -f docker-compose.tests.yaml up -d --build
-          docker compose logs db
+          docker compose logs postgres
 
       - name: Check db ready
         run: |
