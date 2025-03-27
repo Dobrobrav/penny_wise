@@ -3,6 +3,11 @@ services:
     image: postgres:16
     container_name: postgres
     restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
 
   web:
     depends_on:
