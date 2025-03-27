@@ -3,19 +3,7 @@ services:
     image: postgres:16
     container_name: postgres
     restart: always
-    environment:
-      POSTGRES_DB: test_db
-      POSTGRES_USER: test_user
-      POSTGRES_PASSWORD: test_pass
-
 
   web:
-    environment:
-      IS_DB_CONNECTION_OVER_URL: false
-      PENNY_WISE_DB_NAME: test_db
-      PENNY_WISE_DB_USER: test_user
-      PENNY_WISE_DB_PASSWORD: test_pass
-      PENNY_WISE_DB_HOST: db
-      PENNY_WISE_DB_PORT: 5432
     depends_on:
       - db
