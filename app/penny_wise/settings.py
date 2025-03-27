@@ -27,7 +27,7 @@ env = environ.Env(
 env_vars_loaded = "IS_PROD" in os.environ # IS_PROD is just arbitrary env var to see that env vars are loaded
 # if env vars not loaded automatically, then trying to load then manually
 if not env_vars_loaded:
-    env_file_path = BASE_DIR.parent / ".env"
+    env_file_path = BASE_DIR.parent / "env/.env"
     env.read_env(env_file_path)
 
 # Quick-start development settings - unsuitable for production

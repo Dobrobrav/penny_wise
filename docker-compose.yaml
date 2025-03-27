@@ -6,16 +6,5 @@ services:
       - ./app:/usr/src/app
     ports:
       - '80:8000'
-    environment:
-      - SECRET_KEY=some_random_secret_key
-      - DEBUG=False
-      - IS_PROD=True
-      - IS_DB_CONNECTION_OVER_URL=${IS_DB_CONNECTION_OVER_URL}
-
-      - DB_URL=${DB_URL}
-
-      - PENNY_WISE_DB_NAME=${PENNY_WISE_DB_NAME}
-      - PENNY_WISE_DB_USER=${PENNY_WISE_DB_USER}
-      - PENNY_WISE_DB_PASSWORD=${PENNY_WISE_DB_PASSWORD}
-      - PENNY_WISE_DB_HOST=${PENNY_WISE_DB_HOST}
-      - PENNY_WISE_DB_PORT=${PENNY_WISE_DB_PORT}
+    env_file:
+      - env/.env
