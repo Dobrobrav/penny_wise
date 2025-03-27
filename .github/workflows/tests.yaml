@@ -17,6 +17,10 @@ jobs:
         run: |
           docker compose -f docker-compose.yaml -f docker-compose.tests.yaml up -d --build
 
+      - name: Check db ready
+        run: |
+          docker compose exec db pg_isready -U test_user
+
       - name: Run tests inside container
         run: |
           docker compose exec -T web python manage.py test --verbosity=2
