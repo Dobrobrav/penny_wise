@@ -4,18 +4,11 @@ services:
     container_name: postgres
     restart: always
     environment:
-      POSTGRES_DB: test_db
-      POSTGRES_USER: test_user
-      POSTGRES_PASSWORD: test_pass
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
 
 
   web:
-    environment:
-      IS_DB_CONNECTION_OVER_URL: false
-      PENNY_WISE_DB_NAME: test_db
-      PENNY_WISE_DB_USER: test_user
-      PENNY_WISE_DB_PASSWORD: test_pass
-      PENNY_WISE_DB_HOST: db
-      PENNY_WISE_DB_PORT: 5432
     depends_on:
       - db
