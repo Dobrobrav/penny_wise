@@ -10,8 +10,17 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    env:
+      IS_DB_CONNECTION_OVER_URL: false
+      DB_URL: ""
+      PENNY_WISE_DB_NAME: test_db
+      PENNY_WISE_DB_USER: test_user
+      PENNY_WISE_DB_PASSWORD: test_pass
+      PENNY_WISE_DB_HOST: db
+      PENNY_WISE_DB_PORT: 5432
+
     services:
-      postgres:
+      db:
         image: postgres:16
         env:
           POSTGRES_DB: test_db
