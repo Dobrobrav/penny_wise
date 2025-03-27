@@ -27,6 +27,10 @@ jobs:
           docker compose -f docker-compose.yaml -f docker-compose.tests.yaml up -d --build
           docker compose ps
 
+      - name: Check logs
+        run: |
+          docker compose logs db
+
       - name: Check db ready
         run: |
           docker compose exec db pg_isready -U test_user
