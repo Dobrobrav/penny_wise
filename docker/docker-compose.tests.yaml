@@ -8,13 +8,6 @@ services:
 
 
   web:
-    environment:
-      IS_DB_CONNECTION_OVER_URL: false
-      PENNY_WISE_DB_NAME: test_db
-      PENNY_WISE_DB_USER: test_user
-      PENNY_WISE_DB_PASSWORD: test_pass
-      PENNY_WISE_DB_HOST: db
-      PENNY_WISE_DB_PORT: 5432
     depends_on:
       - db
     env_file:
