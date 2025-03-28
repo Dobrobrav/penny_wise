@@ -1,10 +1,25 @@
-from django.shortcuts import render
+from django.http import HttpRequest, HttpResponse
+from django.shortcuts import render, redirect
+from django.views import View
+
+from expenses.models import Expense
 
 
 # Create your views here.
-def add_expense_view(request):
-    return render(request, template_name='expenses/add_expense.html')
+class AddExpenseView(View):
+    def get(self, request: HttpRequest) -> HttpResponse:
+        return render(request, template_name='expenses/add_expense.html')
+
+    def post(self, request: HttpRequest) -> HttpResponse:
+        expense_data = request.POST
+        Expense.objects.create(
+            name=expense_data['name'],
+            cost=expense_data['cost'],
+            category=expense_data['category'],
+        )
+        return redirect(to='expenses')
 
 
 def display_expenses_view(request):
-    return render(request, template_name='expenses/expenses.html')
+    expenses = Expense.objects.all()
+    return render(request, template_name='expenses/expenses.html', context={'expenses': expenses})

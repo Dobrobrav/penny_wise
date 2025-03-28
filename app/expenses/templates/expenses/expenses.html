@@ -7,13 +7,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Expenses</title>
 </head>
+
 <body>
-Potatoes
-150
-vegetables
+
+{% for expense in expenses %}
+    <p>{{ expense.name }}</p>
+    <p>{{ expense.cost }}</p>
+    <p>{{ expense.category }}</p>
+{% endfor %}
 
 <button id="add_expense_button" class="btn" onclick="window.location.href='{% url 'add_expense' %}'">
     Добавить трату
 </button>
 </body>
+
 </html>
