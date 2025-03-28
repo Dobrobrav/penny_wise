@@ -8,9 +8,11 @@
     <title>Add expense</title>
 </head>
 <body>
-<div id="expense_name"></div>
-<div id="expense_category"></div>
-<div id="expense_cost"></div>
-<div id="expense_img"></div>
+<form action="">
+    <input id="expense_name" type="text">
+    <input id="expense_cost" type="text">
+    <input id="expense_category" type="text">
+    <button type="button" id="save_button" onclick="window.location.href='{% url 'expenses' %}'">Сохранить трату</button>
+</form>
 </body>
 </html>

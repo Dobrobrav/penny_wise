@@ -3,7 +3,7 @@ services:
     depends_on:
       - db
     env_file:
-      - ../env/.env.prod # file .env.prod file is supposed to be added on prod
+      - ../env/.env.prod
 
   db:
     image: postgres:16
