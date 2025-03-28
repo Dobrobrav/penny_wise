@@ -91,10 +91,10 @@ def test_add_expense(
     assert '150' in browser.page_source
     assert 'vegetables' in browser.page_source
 
-    # # and the second expense too
-    # assert 'Milk' in browser.page_source
-    # assert '80' in browser.page_source
-    # assert 'dairy' in browser.page_source
+    # and the second expense too
+    assert 'Milk' in browser.page_source
+    assert '80' in browser.page_source
+    assert 'dairy' in browser.page_source
 
     # the page gets updated and there's the new expense
     pytest.xfail(reason='Finish the test!')
