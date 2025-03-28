@@ -1,5 +1,6 @@
 FROM python:3.13
 
+# these dependencies are for selenium
 RUN apt update && apt install -y --no-install-recommends \
     wget \
     curl \
