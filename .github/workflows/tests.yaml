@@ -30,12 +30,7 @@ jobs:
           echo "Postgres failed to start in time" >&2
           exit 1
 
-      - name: Run django-tests
-        run: |
-          cd docker
-          docker compose exec -T web python manage.py test --verbosity=2
-
-      - name: Run pytest-tests
+      - name: Run tests
         run: |
           cd docker
           docker compose exec web pytest
