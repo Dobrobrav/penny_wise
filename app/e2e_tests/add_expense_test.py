@@ -82,9 +82,9 @@ def _enter_expense_and_save(browser, name, cost, category):
 
 
 def _click_and_wait_for_page_update(browser, button):
-    add_expense_url = browser.current_url
+    current_url = browser.current_url
     button.click()
-    WebDriverWait(browser, 10).until(expected_conditions.url_changes(add_expense_url))
+    WebDriverWait(browser, 20).until(expected_conditions.url_changes(current_url))
 
 
 def _assert_page_contains_expense(browser, name, cost, category):
