@@ -5,6 +5,8 @@ services:
     restart: always
     env_file:
       - ../env/.env.tests
+    volumes:
+      - pgdata_test:/var/lib/postgresql/data
 
 
   web:
@@ -12,3 +14,7 @@ services:
       - db
     env_file:
       - ../env/.env.tests
+
+
+volumes:
+  pgdata_test:

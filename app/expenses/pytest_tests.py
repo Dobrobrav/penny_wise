@@ -24,8 +24,12 @@ def test_add_expense_view_should_add_expense(client):
     assert expense.cost == expense_cost
     assert expense.category == expense_category
 
+
 @pytest.mark.django_db
 def test_add_expense_redirect_to_expenses(client):
-    response: HttpRequest = client.post('/expenses/add-expense/', data={'name': 'foo', 'cost': 'bar', 'category': 'baz'})
+    response: HttpRequest = client.post(
+        '/expenses/add-expense/',
+        data={'name': 'foo', 'cost': 'bar', 'category': 'baz'},
+    )
     assert response.status_code == 302
     assert response.url == '/expenses/'
