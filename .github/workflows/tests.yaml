@@ -21,10 +21,12 @@ jobs:
 
       - name: Show logs django
         run: |
+          cd docker
           docker compose logs web
 
       - name: Show logs db
         run: |
+          cd docker
           docker compose logs postgres
 
       - name: Wait for Postgres to be ready
