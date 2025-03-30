@@ -91,7 +91,6 @@ def _click_and_wait_for_page_update(browser, button):
     current_url = browser.current_url
     button.click()
     logger.info(browser.page_source, when='right_after_click')
-    time.sleep(5)
     logger.info(browser.page_source, when='t=5_secs_after_click')
     WebDriverWait(browser, 20).until(expected_conditions.url_changes(current_url))
 
