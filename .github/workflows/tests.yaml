@@ -18,8 +18,14 @@ jobs:
           cd docker
           docker compose -f docker-compose.yaml -f docker-compose.tests.yaml up -d --build
           docker compose ps
+
+      - name: Show logs django
+        run: |
           docker compose logs web
-#          docker compose logs db
+
+      - name: Show logs db
+        run: |
+          docker compose logs postgres
 
       - name: Wait for Postgres to be ready
         run: |
