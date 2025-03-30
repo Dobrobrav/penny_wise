@@ -36,6 +36,7 @@ jobs:
           docker compose exec web pytest
 
       - name: Show server logs
+        if: always()
         run: |
           cd docker
           docker compose logs web
