@@ -18,6 +18,8 @@ jobs:
           cd docker
           docker compose -f docker-compose.yaml -f docker-compose.tests.yaml up -d --build
           docker compose ps
+          docker compose logs web
+          docker compose logs db
 
       - name: Wait for Postgres to be ready
         run: |
