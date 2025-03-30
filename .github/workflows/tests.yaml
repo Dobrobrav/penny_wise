@@ -30,6 +30,12 @@ jobs:
           echo "Postgres failed to start in time" >&2
           exit 1
 
+      - name: show containers logs
+        run: |
+          cd docker
+          docker compose logs web
+          docker compose logs db
+
       - name: Run tests
         run: |
           cd docker
