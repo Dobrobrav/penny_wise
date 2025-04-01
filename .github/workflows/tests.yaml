@@ -33,7 +33,12 @@ jobs:
       - name: Run tests
         run: |
           cd docker
-          docker compose exec web pytest
+          docker compose exec web pytest 
+          
+      - name: Check logs
+        run: |
+          cd docker
+          docker logs web
 
       - name: Stop Docker Compose
         if: always()

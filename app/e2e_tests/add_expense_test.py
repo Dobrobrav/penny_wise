@@ -31,8 +31,7 @@ def test_add_expense(
         browser: WebDriver,
 ) -> None:
     # user enters the home page
-    # browser.get(f'http://localhost:{settings.DJANGO_HOST_PORT}')
-    browser.get(f'http://localhost')
+    browser.get(f'http://localhost:{settings.DJANGO_HOST_PORT}')
 
     # user gets to the home page
     assert browser.title == 'Money Waste 💸'
