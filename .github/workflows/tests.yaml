@@ -30,21 +30,25 @@ jobs:
           echo "Postgres failed to start in time" >&2
           exit 1
 
-      - name: Check logs postgres
+      - name: Check logs before
+        if: always()
         run: |
           cd docker
+          docker logs web
           docker compose -f docker-compose.yaml -f docker-compose.tests.yaml logs db
 
       - name: Run tests
         run: |
           cd docker
           docker compose exec web pytest 
-          
-      - name: Check logs
+
+      - name: Check logs after
         if: always()
         run: |
           cd docker
           docker logs web
+          docker compose -f docker-compose.yaml -f docker-compose.tests.yaml logs db
+
 
       - name: Stop Docker Compose
         if: always()
