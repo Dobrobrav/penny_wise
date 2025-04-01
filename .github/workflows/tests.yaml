@@ -19,16 +19,6 @@ jobs:
           docker compose -f docker-compose.yaml -f docker-compose.tests.yaml up -d --build
           docker compose ps
 
-      - name: Show logs django
-        run: |
-          cd docker
-          docker compose logs web
-
-      - name: Show logs db
-        run: |
-          cd docker
-          docker compose logs postgres
-
       - name: Wait for Postgres to be ready
         run: |
           cd docker
@@ -40,22 +30,10 @@ jobs:
           echo "Postgres failed to start in time" >&2
           exit 1
 
-      - name: show containers logs
-        run: |
-          cd docker
-          docker compose logs web
-          docker compose logs db
-
       - name: Run tests
         run: |
           cd docker
           docker compose exec web pytest
-
-      - name: Show server logs
-        if: always()
-        run: |
-          cd docker
-          docker compose logs web
 
       - name: Stop Docker Compose
         if: always()
