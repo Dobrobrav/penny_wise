@@ -30,6 +30,11 @@ jobs:
           echo "Postgres failed to start in time" >&2
           exit 1
 
+      - name: Check logs postgres
+        run: |
+          cd docker
+          docker compose -f docker-compose.yaml -f docker-compose.tests.yaml logs db
+
       - name: Run tests
         run: |
           cd docker
