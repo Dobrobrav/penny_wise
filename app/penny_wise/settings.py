@@ -38,6 +38,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
+DJANGO_HOST_PORT = env('DJANGO_HOST_PORT')
+
 
 ALLOWED_HOSTS = ['*']
 
@@ -50,6 +52,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'django_extensions',
 
     'expenses',
 ]

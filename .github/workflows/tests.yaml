@@ -19,26 +19,27 @@ jobs:
           docker compose -f docker-compose.yaml -f docker-compose.tests.yaml up -d --build
           docker compose ps
 
-      - name: Wait for Postgres to be ready
+      - name: Wait Django app is ready
         run: |
           cd docker
           for i in {1..15}; do
-            echo "Checking Postgres availability ($i/15)..."
-            docker compose -f docker-compose.yaml -f docker-compose.tests.yaml exec -T db pg_isready -U test_user && exit 0
+            echo "Checking if Django is up ($i/15)..."
+            if curl -s --fail http://localhost > /dev/null; then
+              echo "Django is ready!"
+              exit 0
+            fi
+            echo "Django is not ready yet..."
             sleep 2
           done
-          echo "Postgres failed to start in time" >&2
+          echo "Django failed to start in time." >&2
+          docker compose logs web
           exit 1
 
-      - name: Run django-tests
-        run: |
-          cd docker
-          docker compose exec -T web python manage.py test --verbosity=2
-
-      - name: Run pytest-tests
+      - name: Run tests
         run: |
           cd docker
           docker compose exec web pytest
+
 
       - name: Stop Docker Compose
         if: always()
