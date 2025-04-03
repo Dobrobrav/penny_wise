@@ -26,7 +26,7 @@ def test_add_expense_view_should_add_expense(client):
 
 
 @pytest.mark.django_db
-def test_add_expense_redirect_to_expenses(client):
+def test_add_expense_should_redirect_to_expenses(client):
     response: HttpRequest = client.post(
         '/expenses/add-expense/',
         data={'name': 'foo', 'cost': 'bar', 'category': 'baz'},
