@@ -1,5 +1,3 @@
-import time
-
 import pytest
 import structlog
 from selenium import webdriver
@@ -87,11 +85,8 @@ def _enter_expense_and_save(browser, name, cost, category):
 
 
 def _click_and_wait_for_page_update(browser, button):
-    logger.info(browser.page_source, when='before_click')
     current_url = browser.current_url
     button.click()
-    logger.info(browser.page_source, when='right_after_click')
-    logger.info(browser.page_source, when='t=5_secs_after_click')
     WebDriverWait(browser, 20).until(expected_conditions.url_changes(current_url))
 
 
