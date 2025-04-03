@@ -19,12 +19,16 @@ jobs:
           docker compose -f docker-compose.yaml -f docker-compose.tests.yaml up -d --build
           docker compose ps
 
-      - name: Check logs right after setting up docker
-        if: always()
+#      - name: Check logs right after setting up docker
+#        if: always()
+#        run: |
+#          cd docker
+#          docker logs web
+#          docker compose -f docker-compose.yaml -f docker-compose.tests.yaml logs db
+
+      - name: Wait some time
         run: |
-          cd docker
-          docker logs web
-          docker compose -f docker-compose.yaml -f docker-compose.tests.yaml logs db
+          sleep 10
 
       - name: Wait for Postgres to be ready
         run: |
