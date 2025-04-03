@@ -63,7 +63,7 @@ def test_add_expense(
 
     # user sees both expenses
     _assert_page_contains_expense(browser, name='Potatoes', cost='150', category='vegetables')
-    # _assert_page_contains_expense(browser, name='Milk', cost='80', category='dairy')
+    _assert_page_contains_expense(browser, name='Milk', cost='80', category='dairy')
 
     pytest.xfail(reason='Finish the test!')
 
