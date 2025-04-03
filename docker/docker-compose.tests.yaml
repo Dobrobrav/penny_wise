@@ -6,7 +6,7 @@ services:
     env_file:
       - ../env/.env.tests
     volumes:
-      - foobar_volume:/var/lib/postgresql/data
+      - pgdata_test:/var/lib/postgresql/data
 
 
   web:
@@ -17,4 +17,4 @@ services:
 
 
 volumes:
-  foobar_volume:
+  pgdata_test:
