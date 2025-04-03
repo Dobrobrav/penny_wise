@@ -1,6 +1,7 @@
 #!/bin/sh
 
-echo "Waiting for postgres..."
+
+echo "Start waiting for postgres..."
 
 max_retries=15
 attempt=1
@@ -16,6 +17,7 @@ while ! nc -z db 5432; do
 done
 
 echo "Postgres is up - executing commands"
+
 
 python manage.py migrate
 python manage.py runserver 0.0.0.0:80

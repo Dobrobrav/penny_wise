@@ -19,39 +19,11 @@ jobs:
           docker compose -f docker-compose.yaml -f docker-compose.tests.yaml up -d --build
           docker compose ps
 
-      - name: Wait some time
-        run: |
-          sleep 5
-
-#      - name: Wait for Postgres to be ready
-#        run: |
-#          cd docker
-#          for i in {1..15}; do
-#            echo "Checking Postgres availability ($i/15)..."
-#            docker compose -f docker-compose.yaml -f docker-compose.tests.yaml exec -T db pg_isready -U test_user && exit 0
-#            sleep 2
-#          done
-#          echo "Postgres failed to start in time" >&2
-#          exit 1
-
-      - name: Check logs
-        if: always()
-        run: |
-          cd docker
-          docker compose -f docker-compose.yaml -f docker-compose.tests.yaml logs web
-          docker compose -f docker-compose.yaml -f docker-compose.tests.yaml logs db
 
       - name: Run tests
         run: |
           cd docker
-          docker compose exec web pytest 
-
-      - name: Check logs
-        if: always()
-        run: |
-          cd docker
-          docker compose -f docker-compose.yaml -f docker-compose.tests.yaml logs web
-          docker compose -f docker-compose.yaml -f docker-compose.tests.yaml logs db
+          docker compose exec web pytest
 
 
       - name: Stop Docker Compose

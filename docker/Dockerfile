@@ -23,7 +23,8 @@ RUN apt update && apt install -y --no-install-recommends \
     libgbm1 \
     xdg-utils \
     chromium \
-    chromium-driver
+    chromium-driver \
+    netcat-openbsd
 
 COPY /conf /usr/src/conf
 WORKDIR /usr/src
