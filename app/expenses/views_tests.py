@@ -1,7 +1,6 @@
 from decimal import Decimal
 
 import pytest
-from django.core.exceptions import ValidationError
 from django.http import HttpResponse
 
 from expenses.models import Expense
