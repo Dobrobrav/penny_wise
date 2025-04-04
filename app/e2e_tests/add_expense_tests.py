@@ -1,28 +1,12 @@
-import pytest
 import structlog
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.ie.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
 from penny_wise import settings
-from typings import Generator_
 
 logger = structlog.get_logger(__name__)
-
-
-@pytest.fixture
-def browser() -> Generator_[WebDriver]:
-    options = Options()
-    options.add_argument('--headless')  # запускаем без GUI
-    options.add_argument('--no-sandbox')  # стандартные флаги для Docker
-    options.add_argument('--disable-dev-shm-usage')
-    browser = webdriver.Chrome(options)
-    yield browser
-
-    browser.quit()
 
 
 def test_add_expense(
@@ -38,11 +22,11 @@ def test_add_expense(
     add_expense_button = browser.find_element(by=By.ID, value='add_expense_button')
     _click_and_wait_for_page_update(browser, add_expense_button)
 
-    # the button redirects them to the page for creating an expense.
+    # page for creating an expense is open
     assert browser.title == 'Add expense'
     _enter_expense_and_save(browser, name='Potatoes', cost='150', category='vegetables')
 
-    # user is redirected to the page with their expenses
+    # page with user's expenses is open
     assert browser.title == 'Expenses'
 
     # user sees the expense
@@ -52,18 +36,16 @@ def test_add_expense(
     add_expense_button = browser.find_element(by=By.ID, value='add_expense_button')
     _click_and_wait_for_page_update(browser, add_expense_button)
 
-    # the button redirects them to the page for creating an expense.
+    # clicking the button opens page for creating an expense.
     assert browser.title == 'Add expense'
     _enter_expense_and_save(browser, name='Milk', cost='80', category='dairy')
 
-    # user is redirected to the page with their expenses
+    # page with user's expenses is open
     assert browser.title == 'Expenses'
 
     # user sees both expenses
     _assert_page_contains_expense(browser, name='Potatoes', cost='150', category='vegetables')
     _assert_page_contains_expense(browser, name='Milk', cost='80', category='dairy')
-
-    pytest.xfail(reason='Finish the test!')
 
 
 def _enter_expense_and_save(browser, name, cost, category):
