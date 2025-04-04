@@ -1,55 +1,12 @@
-import pytest
 import structlog
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.ie.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
 from penny_wise import settings
-from typings import Generator_
 
 logger = structlog.get_logger(__name__)
-
-
-@pytest.fixture
-def browser() -> Generator_[WebDriver]:
-    options = Options()
-    options.add_argument('--headless')  # запускаем без GUI
-    options.add_argument('--no-sandbox')  # стандартные флаги для Docker
-    options.add_argument('--disable-dev-shm-usage')
-    browser = webdriver.Chrome(options)
-    yield browser
-
-    browser.quit()
-
-
-def test_login(
-        browser: WebDriver,
-) -> None:
-    # user enters home page
-
-    # user clicks button to log in
-
-    # page for authentication is opened
-
-    # user enters login
-
-    # user enters password
-
-    # user presses button to submit login and password
-
-    # home page is opened
-
-    # home page contains user's login
-    ...
-
-
-def test_signup(
-        browser: WebDriver,
-) -> None:
-    ...
 
 
 def test_add_expense(
@@ -89,8 +46,6 @@ def test_add_expense(
     # user sees both expenses
     _assert_page_contains_expense(browser, name='Potatoes', cost='150', category='vegetables')
     _assert_page_contains_expense(browser, name='Milk', cost='80', category='dairy')
-
-    pytest.xfail(reason='Finish the test!')
 
 
 def _enter_expense_and_save(browser, name, cost, category):
