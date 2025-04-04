@@ -6,9 +6,8 @@ from selenium.webdriver.ie.webdriver import WebDriver
 from typings import Generator_
 
 
-# TODO: consider setting session scope
-@pytest.fixture()
-def browser() -> Generator_[WebDriver]:
+@pytest.fixture(scope='session')
+def browser_for_session() -> Generator_[WebDriver]:
     options = Options()
     options.add_argument('--headless')  # запускаем без GUI
     options.add_argument('--no-sandbox')  # стандартные флаги для Docker
@@ -17,3 +16,9 @@ def browser() -> Generator_[WebDriver]:
     yield browser
 
     browser.quit()
+
+
+@pytest.fixture(scope='function')
+def browser(browser_for_session) -> WebDriver:
+    # TODO: add cleaning of browser state
+    return browser_for_session
