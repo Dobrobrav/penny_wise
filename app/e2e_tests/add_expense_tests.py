@@ -22,11 +22,11 @@ def test_add_expense(
     add_expense_button = browser.find_element(by=By.ID, value='add_expense_button')
     _click_and_wait_for_page_update(browser, add_expense_button)
 
-    # the button redirects them to the page for creating an expense.
+    # page for creating an expense is open
     assert browser.title == 'Add expense'
     _enter_expense_and_save(browser, name='Potatoes', cost='150', category='vegetables')
 
-    # user is redirected to the page with their expenses
+    # page with user's expenses is open
     assert browser.title == 'Expenses'
 
     # user sees the expense
@@ -36,11 +36,11 @@ def test_add_expense(
     add_expense_button = browser.find_element(by=By.ID, value='add_expense_button')
     _click_and_wait_for_page_update(browser, add_expense_button)
 
-    # the button redirects them to the page for creating an expense.
+    # clicking the button opens page for creating an expense.
     assert browser.title == 'Add expense'
     _enter_expense_and_save(browser, name='Milk', cost='80', category='dairy')
 
-    # user is redirected to the page with their expenses
+    # page with user's expenses is open
     assert browser.title == 'Expenses'
 
     # user sees both expenses
