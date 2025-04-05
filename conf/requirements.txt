@@ -34,3 +34,4 @@ whitenoise==6.9.0
 selenium==4.30.0
 pytest
 pytest-django
+pytest-dotenv

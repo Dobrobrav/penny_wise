@@ -40,7 +40,6 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = env('DEBUG')
 DJANGO_HOST_PORT = env('DJANGO_HOST_PORT')
 
-
 ALLOWED_HOSTS = ['*']
 
 # Application definition
