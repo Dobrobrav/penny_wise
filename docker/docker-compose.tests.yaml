@@ -3,10 +3,12 @@ services:
     image: postgres:16
     container_name: db
     restart: always
+    ports:
+      - "5434:5432"
     env_file:
       - ../env/.env.tests
     volumes:
-      - pgdata_test:/var/lib/postgresql/data
+      - /var/lib/postgresql/data
 
 
   web:
@@ -14,7 +16,6 @@ services:
       - db
     env_file:
       - ../env/.env.tests
-
-
-volumes:
-  pgdata_test:
+    environment:
+      - PENNY_WISE_DB_HOST=db
+      - PENNY_WISE_DB_PORT=5432
