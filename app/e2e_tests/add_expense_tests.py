@@ -4,6 +4,7 @@ from selenium.webdriver.ie.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
+from e2e_tests.conftest import clean_server_db
 from penny_wise import settings
 
 logger = structlog.get_logger(__name__)
@@ -11,6 +12,7 @@ logger = structlog.get_logger(__name__)
 
 def test_add_expense(
         browser: WebDriver,
+        clean_server_db,
 ) -> None:
     # user enters the home page
     browser.get(f'http://localhost:{settings.DJANGO_HOST_PORT}')
