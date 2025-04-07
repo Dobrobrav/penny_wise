@@ -11,13 +11,19 @@
 <body>
 
 {% for expense in expenses %}
+    <hr>
     <p>{{ expense.name }}</p>
     <p>{{ expense.cost }}</p>
     <p>{{ expense.category }}</p>
+    <hr>
 {% endfor %}
 
 <button id="add_expense_button" class="btn" onclick="window.location.href='{% url 'add_expense' %}'">
     Добавить трату
+</button>
+
+<button id="home_page_button" class="btn" onclick="window.location.href='{% url 'home' %}'">
+    Домашняя страница
 </button>
 </body>
 
