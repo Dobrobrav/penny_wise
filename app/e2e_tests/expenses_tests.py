@@ -17,10 +17,19 @@ def test_add_expense(
     # user enters the home page
     browser.get(f'http://localhost:{settings.DJANGO_HOST_PORT}')
 
-    # user gets to the home page
+    # user sees home page
     assert browser.title == 'Money Waste 💸'
 
-    # user presses a button to add an expense
+    # user presses button to see expenses
+    display_expenses_button = browser.find_element(by=By.ID, value='display_expenses_button')
+    _click_and_wait_for_page_update(browser, display_expenses_button)
+
+    # uses doesn't see the expenses they are going to add
+    _assert_page_not_contains_expense(browser, name='Potatoes', cost='150', category='vegetables')
+    _assert_page_not_contains_expense(browser, name='Milk', cost='80', category='dairy')
+    _assert_page_not_contains_expense(browser, name='Twix', cost='55', category='chocolate bar')
+
+    # user presses button to add an expense
     add_expense_button = browser.find_element(by=By.ID, value='add_expense_button')
     _click_and_wait_for_page_update(browser, add_expense_button)
 
@@ -33,6 +42,8 @@ def test_add_expense(
 
     # user sees the expense
     _assert_page_contains_expense(browser, name='Potatoes', cost='150', category='vegetables')
+    _assert_page_not_contains_expense(browser, name='Milk', cost='80', category='dairy')
+    _assert_page_not_contains_expense(browser, name='Twix', cost='55', category='chocolate bar')
 
     # user clicks button to add another expense
     add_expense_button = browser.find_element(by=By.ID, value='add_expense_button')
@@ -48,6 +59,30 @@ def test_add_expense(
     # user sees both expenses
     _assert_page_contains_expense(browser, name='Potatoes', cost='150', category='vegetables')
     _assert_page_contains_expense(browser, name='Milk', cost='80', category='dairy')
+    _assert_page_not_contains_expense(browser, name='Twix', cost='55', category='chocolate bar')
+
+    # user clicks button to open home page
+    home_page_button = browser.find_element(by=By.ID, value='home_page_button')
+    _click_and_wait_for_page_update(browser, home_page_button)
+
+    # user sees home page
+    assert browser.title == 'Money Waste 💸'
+
+    # user presses button to add expense
+    add_expense_button = browser.find_element(by=By.ID, value='add_expense_button')
+    _click_and_wait_for_page_update(browser, add_expense_button)
+
+    # page for creating an expense is open
+    assert browser.title == 'Add expense'
+    _enter_expense_and_save(browser, name='Twix', cost='55', category='chocolate bar')
+
+    # page with user's expenses is open
+    assert browser.title == 'Expenses'
+
+    # user sees the expense
+    _assert_page_contains_expense(browser, name='Potatoes', cost='150', category='vegetables')
+    _assert_page_contains_expense(browser, name='Milk', cost='80', category='dairy')
+    _assert_page_contains_expense(browser, name='Twix', cost='55', category='chocolate bar')
 
 
 def _enter_expense_and_save(browser, name, cost, category):
@@ -72,6 +107,12 @@ def _click_and_wait_for_page_update(browser, button):
     current_url = browser.current_url
     button.click()
     WebDriverWait(browser, 20).until(expected_conditions.url_changes(current_url))
+
+
+def _assert_page_not_contains_expense(browser, name, cost, category):
+    assert name not in browser.page_source
+    assert cost not in browser.page_source
+    assert category not in browser.page_source
 
 
 def _assert_page_contains_expense(browser, name, cost, category):
