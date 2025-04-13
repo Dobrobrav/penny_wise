@@ -18,7 +18,7 @@ class ExpenseProcessor:
         self._report_generator = report_generator
         self._user_notifier = notifier
 
-    def process(self, expense: Expense) -> Any:
+    def process(self, expense: Expense) -> None:
         expense.save()
         if self._report_generator and self._user_notifier:
             report = self._report_generator.generate(expense)
