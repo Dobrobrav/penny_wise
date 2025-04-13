@@ -126,3 +126,7 @@ def test_expense_processor_with_defaults(
         f_expense_1: Expense,
 ) -> None:
     f_default_expense_processor.process(f_expense_1)
+
+    expenses_from_db = Expense.objects.all()
+    assert len(expenses_from_db) == 1
+    assert expenses_from_db[0] == f_expense_1
