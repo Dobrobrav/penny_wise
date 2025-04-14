@@ -2,7 +2,7 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 from django.views import View
 
-from expenses.expense_processor import ExpenseProcessor
+from expenses.expense_submission_handler import ExpenseSubmissionHandler
 from expenses.models import Expense
 
 
@@ -18,7 +18,7 @@ class AddExpenseView(View):
             cost=expense_data['cost'],
             category=expense_data['category'],
         )
-        ExpenseProcessor().process(expense)
+        ExpenseSubmissionHandler().process(expense)
         return redirect(to='expenses')
 
 

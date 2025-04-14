@@ -7,7 +7,7 @@ from expenses.user_notifiers import UserNotifier
 User = get_user_model()
 
 
-class ExpenseProcessor:
+class ExpenseSubmissionHandler:
     def __init__(
             self,
             report_generator: ReportGenerator | None = None,
