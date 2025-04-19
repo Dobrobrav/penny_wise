@@ -1,4 +1,9 @@
+import pytest
 from selenium.webdriver.chrome.webdriver import WebDriver
+from selenium.webdriver.common.by import By
+
+from e2e_tests.conftest import _click_and_wait_for_page_update
+from penny_wise import settings
 
 
 def test_login(
