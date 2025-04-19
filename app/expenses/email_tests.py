@@ -1,5 +1,6 @@
 from .email import Email
 
+
 def test_email() -> None:
     Email(
         address='test_address',
