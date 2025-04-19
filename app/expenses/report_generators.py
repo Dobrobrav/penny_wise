@@ -16,7 +16,6 @@ class ReportGenerator(ABC):
 
 
 class FakeReportGenerator(ReportGenerator):
-
     def generate(self, expense: Expense) -> Report:
         return Report(
             content=expense.name
