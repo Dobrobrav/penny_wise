@@ -7,6 +7,8 @@ from django.apps import apps
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.ie.webdriver import WebDriver
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.wait import WebDriverWait
 
 from typings import Generator_
 
@@ -62,3 +64,9 @@ def _clean_server_db(db_cursor):
         db_cursor.execute(f'TRUNCATE TABLE "{table}" RESTART IDENTITY CASCADE;')
 
     db_cursor.connection.commit()
+
+
+def _click_and_wait_for_page_update(browser, button):
+    current_url = browser.current_url
+    button.click()
+    WebDriverWait(browser, 5).until(expected_conditions.url_changes(current_url))
