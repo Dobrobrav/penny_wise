@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 
 from django.contrib.auth import get_user_model
 
-from expenses.email import Email
+from expenses.dtos import Email
 from expenses.email_service import EmailService
 from expenses.report_generators import Report
 

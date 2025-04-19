@@ -1,12 +1,7 @@
-import dataclasses
 from abc import ABC, abstractmethod
 
+from expenses.dtos import Report
 from expenses.models import Expense
-
-
-@dataclasses.dataclass
-class Report:
-    content: str
 
 
 class ReportGenerator(ABC):

@@ -1,7 +1,7 @@
 import pytest
 from django.contrib.auth import get_user_model
 
-from expenses.email import Email
+from expenses.dtos import Email
 from expenses.email_service import FakeEmailService, EmailService
 from expenses.expense_submission_handler import ExpenseSubmissionHandler
 from expenses.models import Expense

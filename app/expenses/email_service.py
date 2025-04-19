@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 
 import structlog
 
-from expenses.email import Email
+from expenses.dtos import Email
 
 logger = structlog.get_logger(__name__)
 
