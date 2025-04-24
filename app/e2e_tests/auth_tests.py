@@ -27,7 +27,7 @@ def test_login(
     ...
 
 
-def test_signup(
+def test_auth(
         browser: WebDriver,
         username: str,
         password: str,
