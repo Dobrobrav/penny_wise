@@ -29,6 +29,9 @@ def test_login(
 
 def test_signup(
         browser: WebDriver,
+        username: str,
+        password: str,
+        clean_server_db,
 ) -> None:
     # user enters homa page
     browser.get(f'http://localhost:{settings.DJANGO_HOST_PORT}')
@@ -41,7 +44,18 @@ def test_signup(
     assert browser.title == 'Sign Up'
 
     # user enters login and password into the form
+    username_input = browser.find_element(by=By.ID, value='username_input')
+    username_input.send_keys(username)
 
-    # user presses sign up button
+    password_input = browser.find_element(by=By.ID, value='password_input')
+    password_input.send_keys(password)
+
+    # user presses submit button
+    submit_button = browser.find_element(by=By.ID, value='submit_button')
+    submit_button.click()
+
+    # user sees personal home page
+    assert browser.title == 'Money Waste 💸'
+    assert username in browser.page_source
 
     pytest.xfail('Finish the test')
