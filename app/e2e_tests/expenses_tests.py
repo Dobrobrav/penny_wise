@@ -1,10 +1,8 @@
 import structlog
 from selenium.webdriver.common.by import By
 from selenium.webdriver.ie.webdriver import WebDriver
-from selenium.webdriver.support import expected_conditions
-from selenium.webdriver.support.wait import WebDriverWait
 
-from e2e_tests.conftest import clean_server_db
+from e2e_tests.conftest import _click_and_wait_for_page_update
 from penny_wise import settings
 
 logger = structlog.get_logger(__name__)
@@ -107,12 +105,6 @@ def _enter_expense_and_save(browser, name, cost, category):
     save_button = browser.find_element(by=By.ID, value='save_button')
 
     _click_and_wait_for_page_update(browser, save_button)
-
-
-def _click_and_wait_for_page_update(browser, button):
-    current_url = browser.current_url
-    button.click()
-    WebDriverWait(browser, 20).until(expected_conditions.url_changes(current_url))
 
 
 def _assert_page_not_contains_expense(browser, name, cost, category):
